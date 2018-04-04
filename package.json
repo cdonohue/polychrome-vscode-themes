@@ -1,7 +1,7 @@
 {
   "name": "polychrome-themes",
-  "displayName": "polychrome-themes",
-  "description": "",
+  "displayName": "Polychrome themes",
+  "description": "Generated light and dark themes for vscode",
   "version": "0.0.1",
   "publisher": "cdonohue",
   "engines": {
@@ -16,7 +16,7 @@
   "main": "./extension",
   "contributes": {
     "configuration": {
-      "title": "Polychrome theme",
+      "title": "Polychrome theme configuration",
       "properties": {
         "polychrome.dark.primary": {
           "default": "#a59ccc",
