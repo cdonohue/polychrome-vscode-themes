@@ -1,9 +1,9 @@
 {
   "name": "polychrome-vscode-themes",
   "displayName": "Polychrome themes",
-  "description": "Generated light and dark themes for vscode",
+  "description": "🎨 Generated light and dark themes for vscode",
   "version": "0.0.1",
-  "publisher": "cdonohue",
+  "publisher": "Chad Donohue",
   "engines": {
     "vscode": "^1.20.0"
   },
