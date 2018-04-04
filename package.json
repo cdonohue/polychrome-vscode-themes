@@ -69,7 +69,7 @@
         ]
     },
     "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
+        "postinstall": "node ./node_modules/vscode/bin/install && node ./rebuildThemes",
         "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {

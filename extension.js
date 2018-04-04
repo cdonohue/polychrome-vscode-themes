@@ -61,5 +61,7 @@ function activate(context) {
 
 exports.activate = activate;
 
+exports.updateTheme = updateTheme;
+
 function deactivate() { }
 exports.deactivate = deactivate;
