@@ -1,86 +1,91 @@
 {
-    "name": "polychrome-vscode-themes",
-    "displayName": "Polychrome themes",
-    "description": "🎨 Generated light and dark themes for vscode",
-    "version": "0.0.2",
-    "publisher": "cdonohue",
-    "engines": {
-        "vscode": "^1.20.0"
-    },
-    "categories": [
-        "Themes"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "main": "./extension",
-    "contributes": {
-        "configuration": {
-            "title": "Polychrome theme configuration",
-            "properties": {
-                "polychrome.dark.primary": {
-                    "default": "#a59ccc",
-                    "description": "Controls the primary color to use when generating the dark polychrome theme",
-                    "type": "string"
-                },
-                "polychrome.dark.accent": {
-                    "default": "#ffe685",
-                    "description": "Controls the accent color to use when generating the dark polychrome theme",
-                    "type": "string"
-                },
-                "polychrome.dark.background": {
-                    "default": "#2a2833",
-                    "description": "Controls the background color to use when generating the dark polychrome theme",
-                    "type": "string"
-                },
-                "polychrome.light.primary": {
-                    "default": "#6B3DF1",
-                    "description": "Controls the primary color to use when generating the light polychrome theme",
-                    "type": "string"
-                },
-                "polychrome.light.accent": {
-                    "default": "#A97E50",
-                    "description": "Controls the accent color to use when generating the light polychrome theme",
-                    "type": "string"
-                },
-                "polychrome.light.background": {
-                    "default": "#FBFAF9",
-                    "description": "Controls the background color to use when generating the light polychrome theme",
-                    "type": "string"
-                }
-            }
+  "name": "polychrome-vscode-themes",
+  "displayName": "Polychrome themes",
+  "description": "🎨 Generated light and dark themes for vscode",
+  "version": "0.0.2",
+  "publisher": "cdonohue",
+  "engines": {
+    "vscode": "^1.20.0"
+  },
+  "icon": "./images/icon.png",
+  "galleryBanner": {
+    "color": "#23222B",
+    "theme": "dark"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "configuration": {
+      "title": "Polychrome theme configuration",
+      "properties": {
+        "polychrome.dark.primary": {
+          "default": "#a59ccc",
+          "description": "Controls the primary color to use when generating the dark polychrome theme",
+          "type": "string"
         },
-        "themes": [
-            {
-                "label": "Polychrome Dark",
-                "uiTheme": "vs-dark",
-                "path": "./themes/polychrome-dark-color-theme.json"
-            },
-            {
-                "label": "Polychrome Light",
-                "uiTheme": "vs",
-                "path": "./themes/polychrome-light-color-theme.json"
-            }
-        ]
+        "polychrome.dark.accent": {
+          "default": "#ffe685",
+          "description": "Controls the accent color to use when generating the dark polychrome theme",
+          "type": "string"
+        },
+        "polychrome.dark.background": {
+          "default": "#2a2833",
+          "description": "Controls the background color to use when generating the dark polychrome theme",
+          "type": "string"
+        },
+        "polychrome.light.primary": {
+          "default": "#6B3DF1",
+          "description": "Controls the primary color to use when generating the light polychrome theme",
+          "type": "string"
+        },
+        "polychrome.light.accent": {
+          "default": "#A97E50",
+          "description": "Controls the accent color to use when generating the light polychrome theme",
+          "type": "string"
+        },
+        "polychrome.light.background": {
+          "default": "#FBFAF9",
+          "description": "Controls the background color to use when generating the light polychrome theme",
+          "type": "string"
+        }
+      }
     },
-    "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.0",
-        "eslint": "^4.6.1",
-        "mocha": "^3.5.0",
-        "typescript": "^2.5.2",
-        "vscode": "^1.1.5"
-    },
-    "dependencies": {
-        "fs-extra": "^5.0.0",
-        "polychrome": "^4.1.2"
-    },
-    "repository": "https://github.com/cdonohue/polychrome-vscode-themes.git",
-    "author": "Chad Donohue <chad.donohue@gmail.com>",
-    "license": "MIT",
-    "private": false
+    "themes": [
+      {
+        "label": "Polychrome Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/polychrome-dark-color-theme.json"
+      },
+      {
+        "label": "Polychrome Light",
+        "uiTheme": "vs",
+        "path": "./themes/polychrome-light-color-theme.json"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.0",
+    "eslint": "^4.6.1",
+    "mocha": "^3.5.0",
+    "typescript": "^2.5.2",
+    "vscode": "^1.1.5"
+  },
+  "dependencies": {
+    "fs-extra": "^5.0.0",
+    "polychrome": "^4.1.2"
+  },
+  "repository": "https://github.com/cdonohue/polychrome-vscode-themes.git",
+  "author": "Chad Donohue <chad.donohue@gmail.com>",
+  "license": "MIT",
+  "private": false
 }
