@@ -3,7 +3,7 @@
   "displayName": "Polychrome themes",
   "description": "🎨 Generated light and dark themes for vscode",
   "version": "0.0.1",
-  "publisher": "Chad Donohue",
+  "publisher": "cdonohue",
   "engines": {
     "vscode": "^1.20.0"
   },
