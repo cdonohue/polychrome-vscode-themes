@@ -1,5 +1,3 @@
-const fs = require("fs");
-const path = require("path");
 const color = require("polychrome");
 
 module.exports = function generateTheme(
@@ -11,20 +9,27 @@ module.exports = function generateTheme(
   const accent = color(accentColor);
   const background = color(backgroundColor);
 
-  const isDarkBg = background.isDark()
-  const bgContrast = background.contrast()
+  const isDarkBg = background.isDark();
+  const bgContrast = background.contrast();
+
+  const isPrimaryExtreme = primary.l === 100 || primary.l === 0;
 
   // Mix
-  const primaryHigh = primary.mix(bgContrast)
-  const primaryLow = isDarkBg ? primary.mix(background).darken(30) : primary.mix(background).lighten()
+  const primaryHigh = isPrimaryExtreme ? primary : primary.mix(bgContrast);
+  const primaryLow = isDarkBg
+    ? primary.mix(background).darken(30)
+    : primary.mix(background).lighten();
+  const primaryMid = isPrimaryExtreme ? primaryHigh.mix(primaryLow) : primary;
 
-  const accentLow = isDarkBg ? accent
-    .mix(background)
-    .setSaturation(10)
-    .darken(15) : accent
-      .mix(background)
-      .setSaturation(10)
-      .lighten();
+  const accentLow = isDarkBg
+    ? accent
+        .mix(background)
+        .setSaturation(10)
+        .darken(15)
+    : accent
+        .mix(background)
+        .setSaturation(10)
+        .lighten();
 
   const [
     primary1,
@@ -37,9 +42,9 @@ module.exports = function generateTheme(
     accent3
   ] = [
     primaryHigh,
-    primaryHigh.mix(primary),
-    primary,
-    primary.mix(primaryLow),
+    primaryHigh.mix(primaryMid),
+    primaryMid,
+    primaryMid.mix(primaryLow),
     primaryLow,
     accent,
     accent.mix(accentLow),
@@ -47,23 +52,47 @@ module.exports = function generateTheme(
   ].map(color => color.hex());
 
   const editorBg = background.hex();
-  const uiBg = background.darken(17).hex();
+  const uiBg = isDarkBg
+    ? background.darken(20).hex()
+    : background.darken(5).hex();
   const uiBgContrast = color(uiBg).contrast();
-  const uiBorder = background.darken(33).hex();
-  const bgHighlight = isDarkBg ? background.lighten(3).hex() : background.darken(3).hex();
-  const lineHighlight = isDarkBg ? background.lighten(20).hex() : background.darken(20).hex();
+  const uiBorder = isDarkBg
+    ? color(uiBg)
+        .darken(15)
+        .hex()
+    : color(uiBg)
+        .darken(5)
+        .hex();
+  const bgHighlight = isDarkBg
+    ? background.lighten(3).hex()
+    : background.darken(3).hex();
+  const lineHighlight = isDarkBg
+    ? background.lighten(32).hex()
+    : background.darken(8).hex();
 
-  const mutedText = uiBgContrast.setLightness(65).hex();
+  const foreground = isDarkBg
+    ? uiBgContrast.darken().hex()
+    : uiBgContrast.lighten().hex();
 
-  const foreground = uiBgContrast.setLightness(isDarkBg ? 75 : 25).hex();
+  const mutedText = isDarkBg
+    ? color(foreground)
+        .setLightness(60)
+        .hex()
+    : color(foreground)
+        .setLightness(40)
+        .hex();
 
-  const indentGuide = isDarkBg ? background.lighten(20).hex() : background.darken(10).hex();
-  const selection = isDarkBg ? background.lighten(30).hex() : background.darken(10).hex();
+  const indentGuide = isDarkBg
+    ? background.lighten(20).hex()
+    : background.darken(10).hex();
+  const selection = isDarkBg
+    ? background.lighten(30).hex()
+    : background.darken(10).hex();
 
-  const orange = color("#E6C08B");
-  const red = color("#CD5C5C");
-  const blue = color("#87CEFA");
-  const green = color("#5ACD8F");
+  const orange = isDarkBg ? color("#E6C08B") : color("#E6C08B").darken(20);
+  const red = isDarkBg ? color("#CD5C5C") : color("#CD5C5C").darken(20);
+  const blue = isDarkBg ? color("#87CEFA") : color("#CD5C5C").darken(20);
+  const green = isDarkBg ? color("#5ACD8F") : color("#5ACD8F").darken(20);
 
   const theme = `{
     "name": "Polychrome ${isDarkBg ? "Dark" : "Light"}",
@@ -93,14 +122,14 @@ module.exports = function generateTheme(
       "button.hoverBackground": "${primary4}",
       /* Dropdown Control */
       "dropdown.background": "${editorBg}",
-      "dropdown.border": "${primary5}",
+      "dropdown.border": "${bgContrast.hex()}22",
       "dropdown.foreground": "${foreground}",
       // "dropdown.listBackground": "#ff0000",
       /* Input Control */
       "input.background": "${bgHighlight}",
-      "input.border": "${primary5}",
+      "input.border": "${bgContrast.hex()}22",
       "input.foreground": "${bgContrast.hex()}",
-      "input.placeholderForeground": "${primary5}",
+      "input.placeholderForeground": "${bgContrast.hex()}44",
       "inputOption.activeBorder": "${primary4}",
       "inputValidation.errorBackground": "#392A31",
       "inputValidation.errorBorder": "#CD5C5C",
@@ -110,15 +139,13 @@ module.exports = function generateTheme(
       // "inputValidation.warningBorder": "#ff0000",
       /* Scroll Bar Control */
       "scrollbar.shadow": "#00000000",
-      "scrollbarSlider.activeBackground": "${primary5}",
-      "scrollbarSlider.background": "${color(primary5)
-      .darken()
-      .hex()}",
-      "scrollbarSlider.hoverBackground": "${primary5}",
+      "scrollbarSlider.activeBackground": "${bgContrast.hex()}55",
+      "scrollbarSlider.background": "${bgContrast.hex()}11",
+      "scrollbarSlider.hoverBackground": "${bgContrast.hex()}33",
       /* Badge */
       "badge.foreground": "${color(primary3)
-      .contrast()
-      .hex()}",
+        .contrast()
+        .hex()}",
       "badge.background": "${primary3}",
       /* Progress Bar */
       "progressBar.background": "${primary3}",
@@ -140,14 +167,14 @@ module.exports = function generateTheme(
       "activityBar.foreground": "${mutedText}",
       "activityBarBadge.background": "${primary3}",
       "activityBarBadge.foreground": "${color(primary3)
-      .contrast()
-      .hex()}",
+        .contrast()
+        .hex()}",
       /* Side Bar */
       "sideBar.background": "${uiBg}",
       "sideBar.foreground": "${mutedText}",
       "sideBar.dropBackground": "${editorBg}",
-      "sideBarSectionHeader.foreground": "${primary1}",
-      "sideBarTitle.foreground": "${primary1}",
+      "sideBarSectionHeader.foreground": "${bgContrast.hex()}aa",
+      "sideBarTitle.foreground": "${bgContrast.hex()}aa",
       "sideBarSectionHeader.background": "#0000",
       "sideBar.border": "${uiBorder}",
       /* Editor Groups and Tabs */
@@ -162,7 +189,9 @@ module.exports = function generateTheme(
       "tab.unfocusedInactiveForeground": "${mutedText}",
       "tab.border": "${uiBorder}",
       "tab.activeBorder": "${editorBg}",
-      "tab.activeForeground": "${color(editorBg).contrast().hex()}",
+      "tab.activeForeground": "${color(editorBg)
+        .contrast()
+        .hex()}",
       "tab.hoverBackground": "${editorBg}",
       "tab.hoverBorder": "${editorBg}",
       "tab.unfocusedActiveBorder": "${editorBg}",
@@ -173,13 +202,13 @@ module.exports = function generateTheme(
       /* Editor Colors */
       "editor.background": "${editorBg}",
       "editor.foreground": "${primary2}",
-      "editor.selectionBackground": "${selection}",
-      "editor.inactiveSelectionBackground": "${selection}",
-      "editor.selectionHighlightBackground": "${primary2}55",
+      "editor.selectionBackground": "${selection}cc",
+      "editor.inactiveSelectionBackground": "${selection}cc",
+      "editor.selectionHighlightBackground": "${selection}99",
       "editor.selectionHighlightBorder": "#0000",
-      "editor.wordHighlightBackground": "${primary1}33",
+      "editor.wordHighlightBackground": "${selection}cc",
       "editor.wordHighlightBorder": "#0000",
-      "editor.wordHighlightStrongBackground": "${accent1}22",
+      "editor.wordHighlightStrongBackground": "${selection}",
       "editor.wordHighlightStrongBorder": "#0000",
       "editor.findMatchBackground": "${primary1}55",
       "editor.findMatchBorder": "#0000",
@@ -188,15 +217,15 @@ module.exports = function generateTheme(
       "editor.findRangeHighlightBackground": "${primary1}22",
       "editor.findRangeHighlightBorder": "#0000",
       "editor.hoverHighlightBackground": "${primary1}33",
-      "editor.lineHighlightBackground": "${primary5}33",
+      "editor.lineHighlightBackground": "${lineHighlight}77",
       "editorLineNumber.foreground": "${color(primary5)
-      .darken(1)
-      .hex()}",
+        .darken(1)
+        .hex()}",
       "editorActiveLineNumber.foreground": "${primary4}",
       "editorCursor.foreground": "${accent1}",
       "editorWhitespace.foreground": "${color(primary5)
-      .darken(10)
-      .hex()}",
+        .darken(10)
+        .hex()}",
       "editorLink.activeForeground": "${primary1}",
       "editor.lineHighlightBorder": "#0000",
       "editor.rangeHighlightBackground": "${primary1}11",
@@ -211,8 +240,8 @@ module.exports = function generateTheme(
       "editorWarning.border": "#0000",
       "editorInfo.foreground": "${blue.hex()}",
       "editorInfo.border": "#0000",
-      "editorGutter.modifiedBackground": "${accent2}",
-      "editorGutter.addedBackground": "${primary2}",
+      "editorGutter.modifiedBackground": "${orange.hex()}",
+      "editorGutter.addedBackground": "${green.hex()}",
       "editorGutter.deletedBackground": "${red.hex()}",
       // editorOverview
       /* Diff Editor Colors */
@@ -248,10 +277,14 @@ module.exports = function generateTheme(
       "statusBar.background": "${uiBg}",
       "statusBar.border": "${uiBorder}",
       "statusBar.foreground": "${mutedText}",
-      "statusBar.debuggingForeground": "${uiBg}",
-      "statusBar.debuggingBackground": "${orange.hex()}",
-      "statusBar.noFolderBackground": "${foreground}",
-      "statusBar.noFolderForeground": "${uiBg}",
+      "statusBar.debuggingForeground": "${color(accent1)
+        .contrast()
+        .hex()}",
+      "statusBar.debuggingBackground": "${accent1}",
+      "statusBar.noFolderBackground": "${primary3}",
+      "statusBar.noFolderForeground": "${color(primary3)
+        .contrast()
+        .hex()}",
       /* Title Bar Colors */
       "titleBar.border": "${uiBorder}",
       "titleBar.activeBackground": "${uiBg}",
