@@ -1,4 +1,4 @@
-const vscode = require("vscode");
+const { commands, window, workspace } = require("vscode");
 const generateTheme = require("./generateTheme");
 const path = require("path");
 const fse = require("fs-extra");
@@ -26,42 +26,52 @@ async function updateTheme(config, isDarkTheme = true) {
   await fse.writeFile(themePath, theme);
 }
 
+function promptForReload() {
+  const action = "Reload";
+
+  window.showInformationMessage(
+    "Reload window in order for changes to take effect for Polychrome",
+    action
+  ).then(selectedAction => {
+    if (selectedAction === action) {
+      commands.executeCommand("workbench.action.reloadWindow");
+    }
+  });
+}
+
+function updateAllThemes() {
+  const darkConfig = workspace.getConfiguration("polychrome.dark");
+  updateTheme(darkConfig);
+  const lightConfig = workspace.getConfiguration("polychrome.light");
+  updateTheme(lightConfig, false);
+}
+
 function activate(context) {
-  context.subscriptions.push(
-    vscode.workspace.onDidChangeConfiguration(e => {
-      if (e.affectsConfiguration("polychrome")) {
-        const updatedThemes = [];
-        if (e.affectsConfiguration("polychrome.dark")) {
-          const darkConfig = vscode.workspace.getConfiguration("polychrome.dark");
-          updateTheme(darkConfig);
+  const commandRegistration = commands.registerCommand("polychrome.generateThemes", () => {
+    updateAllThemes();
+    promptForReload();
+  });
 
-          updatedThemes.push("Polychrome Dark")
-        }
-        if (e.affectsConfiguration("polychrome.light")) {
-          const lightConfig = vscode.workspace.getConfiguration("polychrome.light");
-          updateTheme(lightConfig, false);
-
-          updatedThemes.push("Polychrome Light")
-        }
-
-        const action = "Reload";
-        vscode.window.showInformationMessage(
-          `Reload window in order for changes to take effect for the following themes: 
-          ${updatedThemes.join(", ")}`,
-          action
-        ).then(selectedAction => {
-          if (selectedAction === action) {
-            vscode.commands.executeCommand("workbench.action.reloadWindow");
-          }
-        });
+  const configRegistration = workspace.onDidChangeConfiguration(e => {
+    if (e.affectsConfiguration("polychrome")) {
+      const updatedThemes = [];
+      if (e.affectsConfiguration("polychrome.dark")) {
+        const darkConfig = workspace.getConfiguration("polychrome.dark");
+        updateTheme(darkConfig);
       }
-    })
-  )
+      if (e.affectsConfiguration("polychrome.light")) {
+        const lightConfig = workspace.getConfiguration("polychrome.light");
+        updateTheme(lightConfig, false);
+      }
+
+      promptForReload();
+    }
+  });
+
+  context.subscriptions.push(commandRegistration, configRegistration);
 }
 
 exports.activate = activate;
-
-exports.updateTheme = updateTheme;
 
 function deactivate() { }
 exports.deactivate = deactivate;

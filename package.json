@@ -2,7 +2,7 @@
     "name": "polychrome-vscode-themes",
     "displayName": "Polychrome themes",
     "description": "🎨 Generated light and dark themes for vscode",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "publisher": "cdonohue",
     "engines": {
         "vscode": "^1.20.0"
@@ -16,10 +16,17 @@
         "Themes"
     ],
     "activationEvents": [
+        "onCommand:polychrome.generateThemes",
         "*"
     ],
     "main": "./extension",
     "contributes": {
+        "commands": [
+            {
+                "command": "polychrome.generateThemes",
+                "title": "Polychrome: Generate Dark/Light Themes"
+            }
+        ],
         "configuration": {
             "title": "Polychrome theme configuration",
             "properties": {
@@ -69,7 +76,7 @@
         ]
     },
     "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install && node ./rebuildThemes",
+        "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
