@@ -1,25 +1,25 @@
-const color = require("polychrome");
+const color = require("polychrome")
 
 module.exports = function generateTheme(
   accentColor,
   backgroundColor,
   primaryColor
 ) {
-  const primary = color(primaryColor);
-  const accent = color(accentColor);
-  const background = color(backgroundColor);
+  const primary = color(primaryColor)
+  const accent = color(accentColor)
+  const background = color(backgroundColor)
 
-  const isDarkBg = background.isDark();
-  const bgContrast = background.contrast();
+  const isDarkBg = background.isDark()
+  const bgContrast = background.contrast()
 
-  const isPrimaryExtreme = primary.l === 100 || primary.l === 0;
+  const isPrimaryExtreme = primary.l === 100 || primary.l === 0
 
   // Mix
-  const primaryHigh = isPrimaryExtreme ? primary : primary.mix(bgContrast);
+  const primaryHigh = isPrimaryExtreme ? primary : primary.mix(bgContrast)
   const primaryLow = isDarkBg
     ? primary.mix(background).darken(30)
-    : primary.mix(background).lighten();
-  const primaryMid = isPrimaryExtreme ? primaryHigh.mix(primaryLow) : primary;
+    : primary.mix(background).lighten()
+  const primaryMid = isPrimaryExtreme ? primaryHigh.mix(primaryLow) : primary
 
   const accentLow = isDarkBg
     ? accent
@@ -29,7 +29,7 @@ module.exports = function generateTheme(
     : accent
         .mix(background)
         .setSaturation(10)
-        .lighten();
+        .lighten()
 
   const [
     primary1,
@@ -39,7 +39,7 @@ module.exports = function generateTheme(
     primary5,
     accent1,
     accent2,
-    accent3
+    accent3,
   ] = [
     primaryHigh,
     primaryHigh.mix(primaryMid),
@@ -48,31 +48,52 @@ module.exports = function generateTheme(
     primaryLow,
     accent,
     accent.mix(accentLow),
-    accentLow
-  ].map(color => color.hex());
+    accentLow,
+  ].map((color) => color.hex())
 
-  const editorBg = background.hex();
+  const editorBg = background.hex()
+  const tabBg = isDarkBg
+    ? background.darken(20).hex()
+    : background.darken(5).hex()
+  const sideBarBg = color(tabBg).hex()
+  const sideBarHeaderBg = isDarkBg
+    ? color(sideBarBg)
+        .darken()
+        .hex()
+    : color(sideBarBg)
+        .darken(5)
+        .hex()
+  const activityBarBg = isDarkBg
+    ? color(sideBarHeaderBg)
+        .darken()
+        .hex()
+    : color(sideBarHeaderBg)
+        .darken(5)
+        .hex()
+  const titleBarBg = isDarkBg
+    ? color(activityBarBg)
+        .darken()
+        .hex()
+    : color(activityBarBg)
+        .darken(5)
+        .hex()
+  const panelBg = background.lighten().hex()
+
   const uiBg = isDarkBg
     ? background.darken(20).hex()
-    : background.darken(5).hex();
-  const uiBgContrast = color(uiBg).contrast();
-  const uiBorder = isDarkBg
-    ? color(uiBg)
-        .darken(15)
-        .hex()
-    : color(uiBg)
-        .darken(5)
-        .hex();
+    : background.darken(5).hex()
+  const uiBgContrast = color(uiBg).contrast()
+  const uiBorder = activityBarBg
   const bgHighlight = isDarkBg
-    ? background.lighten(3).hex()
-    : background.darken(3).hex();
+    ? background.lighten().hex()
+    : background.darken().hex()
   const lineHighlight = isDarkBg
     ? background.lighten(32).hex()
-    : background.darken(8).hex();
+    : background.darken(8).hex()
 
   const foreground = isDarkBg
     ? uiBgContrast.darken().hex()
-    : uiBgContrast.lighten().hex();
+    : uiBgContrast.lighten().hex()
 
   const mutedText = isDarkBg
     ? color(foreground)
@@ -80,19 +101,28 @@ module.exports = function generateTheme(
         .hex()
     : color(foreground)
         .setLightness(40)
-        .hex();
+        .hex()
 
   const indentGuide = isDarkBg
     ? background.lighten(20).hex()
-    : background.darken(10).hex();
+    : background.darken(10).hex()
+
+  const indentHighlight = isDarkBg
+    ? background.lighten(40).hex()
+    : background.darken(20).hex()
+
   const selection = isDarkBg
     ? background.lighten(30).hex()
-    : background.darken(10).hex();
+    : background.darken(10).hex()
 
-  const orange = isDarkBg ? color("#E6C08B") : color("#E6C08B").darken(20);
-  const red = isDarkBg ? color("#CD5C5C") : color("#CD5C5C").darken(20);
-  const blue = isDarkBg ? color("#87CEFA") : color("#CD5C5C").darken(20);
-  const green = isDarkBg ? color("#5ACD8F") : color("#5ACD8F").darken(20);
+  const orange = isDarkBg ? color("#e2c08d") : color("#d5880b")
+  const red = isDarkBg ? color("#ff6347") : color("#f42a2a")
+  const blue = isDarkBg ? color("#6494ed") : color("#1492ff")
+  const green = isDarkBg ? color("#73c990") : color("#2db448")
+
+  const gitAdded = green.hex()
+  const gitModified = orange.hex()
+  const gitRemoved = red.hex()
 
   const theme = `{
     "name": "Polychrome ${isDarkBg ? "Dark" : "Light"}",
@@ -100,11 +130,11 @@ module.exports = function generateTheme(
     "colors": {
       /* Contrast Colors */
       "contrastActiveBorder": "#00000000",
-      "contrastBorder": "${uiBorder}00",
+      "contrastBorder": "${uiBgContrast.hex()}11",
       /* Base Colors */
       "focusBorder": "#00000000",
       "foreground": "${foreground}",
-      "widget.shadow": "${uiBorder}",
+      "widget.shadow": "#0004",
       "selection.background": "${selection}",
       "descriptionForeground": "${mutedText}",
       "errorForeground": "${red.hex()}",
@@ -150,8 +180,8 @@ module.exports = function generateTheme(
       /* Progress Bar */
       "progressBar.background": "${primary3}",
       /* Lists and Trees */
-      "list.activeSelectionBackground": "${bgHighlight}",
-      "list.inactiveSelectionBackground": "${bgHighlight}",
+      "list.activeSelectionBackground": "${editorBg}",
+      "list.inactiveSelectionBackground": "${editorBg}",
       "list.activeSelectionForeground": "${bgContrast.hex()}",
       "list.dropBackground": "${editorBg}",
       "list.focusBackground": "${bgHighlight}",
@@ -161,8 +191,8 @@ module.exports = function generateTheme(
       "list.hoverForeground": "${foreground}",
       "list.inactiveSelectionForeground": "${bgContrast.hex()}",
       /* Activity Bar */
-      "activityBar.background": "${uiBg}",
-      "activityBar.border": "${uiBorder}",
+      "activityBar.background": "${activityBarBg}",
+      "activityBar.border": "${uiBgContrast.hex()}11",
       "activityBar.dropBackground": "${editorBg}",
       "activityBar.foreground": "${mutedText}",
       "activityBarBadge.background": "${primary3}",
@@ -170,19 +200,19 @@ module.exports = function generateTheme(
         .contrast()
         .hex()}",
       /* Side Bar */
-      "sideBar.background": "${uiBg}",
+      "sideBar.background": "${sideBarBg}",
       "sideBar.foreground": "${mutedText}",
       "sideBar.dropBackground": "${editorBg}",
       "sideBarSectionHeader.foreground": "${bgContrast.hex()}aa",
       "sideBarTitle.foreground": "${bgContrast.hex()}aa",
-      "sideBarSectionHeader.background": "#0000",
+      "sideBarSectionHeader.background": "${sideBarHeaderBg}00",
       "sideBar.border": "${uiBorder}",
       /* Editor Groups and Tabs */
-      "editorGroup.background": "${uiBg}",
+      "editorGroup.background": "${sideBarBg}",
       "editorGroup.dropBackground": "${bgHighlight}",
-      "editorGroupHeader.noTabsBackground": "${uiBg}",
+      "editorGroupHeader.noTabsBackground": "${sideBarBg}",
       "editorGroupHeader.tabsBorder": "${editorBg}",
-      "editorGroupHeader.tabsBackground": "${uiBg}",
+      "editorGroupHeader.tabsBackground": "${sideBarBg}",
       "editorGroup.border": "${uiBorder}",
       "tab.activeBackground": "${editorBg}",
       "tab.inactiveForeground": "${mutedText}",
@@ -192,13 +222,15 @@ module.exports = function generateTheme(
       "tab.activeForeground": "${color(editorBg)
         .contrast()
         .hex()}",
-      "tab.hoverBackground": "${editorBg}",
+      "tab.hoverBackground": "${color(editorBg)
+        .lighten()
+        .hex()}",
       "tab.hoverBorder": "${editorBg}",
       "tab.unfocusedActiveBorder": "${editorBg}",
       "tab.unfocusedActiveForeground": "${mutedText}",
       "tab.unfocusedHoverBackground": "${editorBg}",
       "tab.unfocusedHoverBorder": "${editorBg}",
-      "tab.inactiveBackground": "${uiBg}",
+      "tab.inactiveBackground": "${tabBg}",
       /* Editor Colors */
       "editor.background": "${editorBg}",
       "editor.foreground": "${primary2}",
@@ -221,11 +253,12 @@ module.exports = function generateTheme(
       "editorLineNumber.foreground": "${color(primary5)
         .darken(1)
         .hex()}",
-      "editorActiveLineNumber.foreground": "${primary4}",
+      "editorLineNumber.activeForeground": "${primary4}",
       "editorCursor.foreground": "${accent1}",
       "editorWhitespace.foreground": "${color(primary5)
         .darken(10)
         .hex()}",
+      "editorIndentGuide.activeBackground": "${indentHighlight}",
       "editorLink.activeForeground": "${primary1}",
       "editor.lineHighlightBorder": "#0000",
       "editor.rangeHighlightBackground": "${primary1}11",
@@ -268,14 +301,14 @@ module.exports = function generateTheme(
       /* Merge Conflicts */
       /* Panel Colors */
       "panel.border": "${uiBorder}",
-      "panel.background": "${editorBg}",
-      "panel.dropBackground": "${uiBg}",
+      "panel.background": "${panelBg}",
+      "panel.dropBackground": "${editorBg}",
       "panelTitle.activeBorder": "${primary2}",
       "panelTitle.activeForeground": "${primary1}",
       "panelTitle.inactiveForeground": "${mutedText}",
       /* Status Bar Colors */
-      "statusBar.background": "${uiBg}",
-      "statusBar.border": "${uiBorder}",
+      "statusBar.background": "${titleBarBg}",
+      "statusBar.border": "#00000000",
       "statusBar.foreground": "${mutedText}",
       "statusBar.debuggingForeground": "${color(accent1)
         .contrast()
@@ -286,18 +319,23 @@ module.exports = function generateTheme(
         .contrast()
         .hex()}",
       /* Title Bar Colors */
-      "titleBar.border": "${uiBorder}",
-      "titleBar.activeBackground": "${uiBg}",
+      "titleBar.border": "#00000000",
+      "titleBar.activeBackground": "${titleBarBg}",
       /* Notification Dialog Colors */  
       "notificationCenter.border": "#0000",
       "notificationCenterHeader.foreground": "${primary1}",
-      "notificationCenterHeader.background": "${uiBg}",
+      "notificationCenterHeader.background": "${activityBarBg}",
       "notificationToast.border": "#0000",
       "notifications.foreground": "${primary1}",
       "notifications.border": "${uiBorder}",
-      "notifications.background": "${background.lighten().hex()}",
+      "notifications.background": "${sideBarBg}",
       "notificationLink.foreground": "${primary3}",
       /* Extensions */
+      "extensionButton.prominentBackground": "${primary5}",
+      "extensionButton.prominentForeground": "${color(primary5)
+        .contrast()
+        .hex()}",
+      "extensionButton.prominentHoverBackground": "${primary4}",
       /* Quick Picker */
       /* Integrated Terminal Colors */
       "terminal.ansiBlack": "${primary5}",
@@ -321,11 +359,11 @@ module.exports = function generateTheme(
       /* Welcome Page */
       /* Git Colors */
       "gitDecoration.conflictingResourceForeground": "${red.hex()}",
-      "gitDecoration.deletedResourceForeground": "${red.hex()}",
+      "gitDecoration.deletedResourceForeground": "${gitRemoved}",
       "gitDecoration.ignoredResourceForeground": "${mutedText}77",
-      "gitDecoration.modifiedResourceForeground": "${orange.hex()}",
-      "gitDecoration.submoduleResourceForeground": "${blue.hex()}",
-      "gitDecoration.untrackedResourceForeground": "${green.hex()}"
+      "gitDecoration.modifiedResourceForeground": "${gitModified}",
+      // "gitDecoration.submoduleResourceForeground": "${blue.hex()}",
+      "gitDecoration.untrackedResourceForeground": "${gitAdded}"
     },
     "tokenColors": [
       {
@@ -516,7 +554,7 @@ module.exports = function generateTheme(
         }
       }
     ]
-  }`;
+  }`
 
-  return theme;
-};
+  return theme
+}
