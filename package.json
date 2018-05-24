@@ -1,5 +1,9 @@
 {
   "name": "polychrome-vscode-themes",
+  "repository": "https://github.com/cdonohue/polychrome-vscode-themes.git",
+  "author": "Chad Donohue <chad.donohue@gmail.com>",
+  "license": "MIT",
+  "private": false,
   "displayName": "Polychrome themes",
   "description": "🎨 Generated light and dark themes for vscode",
   "version": "0.0.8",
@@ -91,9 +95,5 @@
   "dependencies": {
     "fs-extra": "^5.0.0",
     "polychrome": "^4.1.2"
-  },
-  "repository": "https://github.com/cdonohue/polychrome-vscode-themes.git",
-  "author": "Chad Donohue <chad.donohue@gmail.com>",
-  "license": "MIT",
-  "private": false
+  }
 }

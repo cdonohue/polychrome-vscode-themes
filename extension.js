@@ -59,7 +59,6 @@ function activate(context) {
 
   const configRegistration = workspace.onDidChangeConfiguration((e) => {
     if (e.affectsConfiguration("polychrome")) {
-      const updatedThemes = []
       if (e.affectsConfiguration("polychrome.dark")) {
         const darkConfig = workspace.getConfiguration("polychrome.dark")
         updateTheme(darkConfig)

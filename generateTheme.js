@@ -362,7 +362,7 @@ module.exports = function generateTheme(
       "gitDecoration.deletedResourceForeground": "${gitRemoved}",
       "gitDecoration.ignoredResourceForeground": "${mutedText}77",
       "gitDecoration.modifiedResourceForeground": "${gitModified}",
-      // "gitDecoration.submoduleResourceForeground": "${blue.hex()}",
+      "gitDecoration.submoduleResourceForeground": "${blue.hex()}",
       "gitDecoration.untrackedResourceForeground": "${gitAdded}"
     },
     "tokenColors": [
