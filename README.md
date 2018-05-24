@@ -1,4 +1,4 @@
-# Polychrome vscode themes
+# Polychrome Themes for VS Code
 
 Generated Duotone themes using [polychrome](https://github.com/cdonohue/polychrome) for your entire workbench!
 
@@ -18,13 +18,13 @@ This extension ships with 2 _base_ themes that can be modified:
 
 ### Create your own
 
-Again, these are the base themes. You can modify the `light` and `dark` theme values in `User Settings` to your liking to create a custom duotone theme of your own.
+Again, these are the base themes. You can modify the `light` and `dark` theme values in `User Settings` to your liking to create a custom duotone theme of your own (👇 See below in `Extension Settings`).
 
 You can also head over to the [Polychrome Theme Viewer](https://polychrome-vscode-preview.netlify.com) to try out different color combinations before updating your user settings.
 
 ## How does this work?
 
-You simply provide a `background`, `primary`, and `accent` color. After that, the extension generates a duotone theme the contains shades and tints of your chosen colors.
+You simply provide a `background`, `primary`, and `accent` color. After that, the extension generates a duotone theme that contains shades and tints of your chosen colors.
 
 ## Known Issues
 
