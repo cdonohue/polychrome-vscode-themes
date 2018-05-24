@@ -6,7 +6,7 @@ Generated Duotone themes using [polychrome](https://github.com/cdonohue/polychro
 
 ## Features
 
-This extension ships with 2 _base_ themes:
+This extension ships with 2 _base_ themes that can be modified:
 
 ### Polychrome Dark
 
