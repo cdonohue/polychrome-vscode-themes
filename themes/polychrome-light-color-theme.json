@@ -1,35 +1,31 @@
 {
+    "polychromeConfig": {
+      "background": "#FBFAF9",
+      "primary": "#6B3DF1",
+      "accent": "#A97E50"
+    },
     "name": "Polychrome Light",
     "type": "light",
     "colors": {
-      /* Contrast Colors */
       "contrastActiveBorder": "#00000000",
       "contrastBorder": "#00000011",
-      /* Base Colors */
       "focusBorder": "#00000000",
       "foreground": "#1A1A1A",
       "widget.shadow": "#0004",
       "selection.background": "#E7E1DB",
       "descriptionForeground": "#666666",
       "errorForeground": "#f42a2a",
-      /* Text Colors */
       "textBlockQuote.background": "#E7E1DB",
       "textBlockQuote.border": "#D1C2F9",
-      // "textCodeBlock.background": "#ff0000",
       "textLink.activeForeground": "#000000",
       "textLink.foreground": "#6B3DF1",
       "textPreformat.foreground": "#BDA58C",
-      // "textSeparator.foreground": "#ff0000",
-      /* Button Control */
       "button.background": "#D1C2F9",
       "button.foreground": "#000000",
       "button.hoverBackground": "#9E7FF5",
-      /* Dropdown Control */
       "dropdown.background": "#FBFAF9",
       "dropdown.border": "#00000022",
       "dropdown.foreground": "#1A1A1A",
-      // "dropdown.listBackground": "#ff0000",
-      /* Input Control */
       "input.background": "#E7E1DB",
       "input.border": "#00000022",
       "input.foreground": "#000000",
@@ -37,21 +33,13 @@
       "inputOption.activeBorder": "#9E7FF5",
       "inputValidation.errorBackground": "#392A31",
       "inputValidation.errorBorder": "#CD5C5C",
-      // "inputValidation.infoBackground": "#ff0000",
-      // "inputValidation.infoBorder": "#ff0000",
-      // "inputValidation.warningBackground": "#ff0000",
-      // "inputValidation.warningBorder": "#ff0000",
-      /* Scroll Bar Control */
       "scrollbar.shadow": "#00000000",
       "scrollbarSlider.activeBackground": "#00000055",
       "scrollbarSlider.background": "#00000011",
       "scrollbarSlider.hoverBackground": "#00000033",
-      /* Badge */
       "badge.foreground": "#FFFFFF",
       "badge.background": "#6B3DF1",
-      /* Progress Bar */
       "progressBar.background": "#6B3DF1",
-      /* Lists and Trees */
       "list.activeSelectionBackground": "#FBFAF9",
       "list.inactiveSelectionBackground": "#FBFAF9",
       "list.activeSelectionForeground": "#000000",
@@ -62,14 +50,12 @@
       "list.hoverBackground": "#E7E1DB",
       "list.hoverForeground": "#1A1A1A",
       "list.inactiveSelectionForeground": "#000000",
-      /* Activity Bar */
       "activityBar.background": "#DED5CD",
       "activityBar.border": "#00000011",
       "activityBar.dropBackground": "#FBFAF9",
       "activityBar.foreground": "#666666",
       "activityBarBadge.background": "#6B3DF1",
       "activityBarBadge.foreground": "#FFFFFF",
-      /* Side Bar */
       "sideBar.background": "#F1EDEA",
       "sideBar.foreground": "#666666",
       "sideBar.dropBackground": "#FBFAF9",
@@ -77,7 +63,6 @@
       "sideBarTitle.foreground": "#000000aa",
       "sideBarSectionHeader.background": "#E7E1DB00",
       "sideBar.border": "#DED5CD",
-      /* Editor Groups and Tabs */
       "editorGroup.background": "#F1EDEA",
       "editorGroup.dropBackground": "#E7E1DB",
       "editorGroupHeader.noTabsBackground": "#F1EDEA",
@@ -97,7 +82,6 @@
       "tab.unfocusedHoverBackground": "#FBFAF9",
       "tab.unfocusedHoverBorder": "#FBFAF9",
       "tab.inactiveBackground": "#F1EDEA",
-      /* Editor Colors */
       "editor.background": "#FBFAF9",
       "editor.foreground": "#502DB4",
       "editor.selectionBackground": "#E7E1DBcc",
@@ -138,11 +122,8 @@
       "editorGutter.modifiedBackground": "#d5880b",
       "editorGutter.addedBackground": "#2db448",
       "editorGutter.deletedBackground": "#f42a2a",
-      // editorOverview
-      /* Diff Editor Colors */
       "diffEditor.insertedTextBackground": "#2db44826",
       "diffEditor.removedTextBackground": "#f42a2a26",
-      /* Editor Widget Colors */
       "editorWidget.background": "#FFFFFF",
       "editorWidget.border": "#9E7FF5",
       "editorSuggestWidget.background": "#F1EDEA",
@@ -151,24 +132,18 @@
       "editorSuggestWidget.highlightForeground": "#502DB4",
       "editorSuggestWidget.selectedBackground": "#E7E1DB",
       "editorHoverWidget.background": "#F1EDEA",
-      // debugException
-      // editorMarkerNavigation
-      /* Peek View Colors */
       "peekView.border": "#9E7FF5",
       "peekViewEditor.background": "#FBFAF9",
       "peekViewEditor.matchHighlightBackground": "#BDA58C44",
       "peekViewEditorGutter.background": "#FBFAF9",
       "peekViewResult.background": "#F1EDEA",
       "peekViewResult.selectionBackground": "#E7E1DB",
-      /* Merge Conflicts */
-      /* Panel Colors */
       "panel.border": "#DED5CD",
       "panel.background": "#FFFFFF",
       "panel.dropBackground": "#FBFAF9",
       "panelTitle.activeBorder": "#502DB4",
       "panelTitle.activeForeground": "#351E78",
       "panelTitle.inactiveForeground": "#666666",
-      /* Status Bar Colors */
       "statusBar.background": "#D6CBC1",
       "statusBar.border": "#00000000",
       "statusBar.foreground": "#666666",
@@ -176,10 +151,8 @@
       "statusBar.debuggingBackground": "#A97E50",
       "statusBar.noFolderBackground": "#6B3DF1",
       "statusBar.noFolderForeground": "#FFFFFF",
-      /* Title Bar Colors */
       "titleBar.border": "#00000000",
-      "titleBar.activeBackground": "#D6CBC1",
-      /* Notification Dialog Colors */  
+      "titleBar.activeBackground": "#D6CBC1", 
       "notificationCenter.border": "#0000",
       "notificationCenterHeader.foreground": "#351E78",
       "notificationCenterHeader.background": "#DED5CD",
@@ -188,19 +161,16 @@
       "notifications.border": "#DED5CD",
       "notifications.background": "#F1EDEA",
       "notificationLink.foreground": "#6B3DF1",
-      /* Extensions */
       "extensionButton.prominentBackground": "#D1C2F9",
       "extensionButton.prominentForeground": "#000000",
       "extensionButton.prominentHoverBackground": "#9E7FF5",
-      /* Quick Picker */
-      /* Integrated Terminal Colors */
       "terminal.ansiBlack": "#D1C2F9",
       "terminal.ansiBlue": "#502DB4",
       "terminal.ansiCyan": "#9E7FF5",
       "terminal.ansiGreen": "#6B3DF1",
       "terminal.ansiMagenta": "#A97E50",
       "terminal.ansiRed": "#f42a2a",
-      "terminal.ansiWhite": "#f5f5f5",
+      "terminal.ansiWhite": "#000000",
       "terminal.ansiYellow": "#A97E50",
       "terminal.ansiBrightBlack": "#BDA58C",
       "terminal.ansiBrightBlue": "#351E78",
@@ -210,10 +180,7 @@
       "terminal.ansiBrightRed": "#A97E50",
       "terminal.ansiBrightWhite": "#000000",
       "terminal.ansiBrightYellow": "#BDA58C",
-      /* Debug */
       "debugToolBar.background": "#E7E1DB",
-      /* Welcome Page */
-      /* Git Colors */
       "gitDecoration.conflictingResourceForeground": "#f42a2a",
       "gitDecoration.deletedResourceForeground": "#f42a2a",
       "gitDecoration.ignoredResourceForeground": "#66666677",
@@ -320,7 +287,6 @@
           "foreground": "#D2CDC8"
         }
       },
-      // Special Cases for font styles
       {
         "name": "Comment",
         "scope": [
