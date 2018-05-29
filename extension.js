@@ -15,6 +15,9 @@ const lightThemePath = path.join(
   "polychrome-light-color-theme.json"
 )
 
+const darkTheme = require(darkThemePath)
+const lightTheme = require(lightThemePath)
+
 async function updateTheme(config, isDarkTheme = true) {
   const { accent, background, primary } = config
 
@@ -26,19 +29,33 @@ async function updateTheme(config, isDarkTheme = true) {
   await fse.writeFile(themePath, theme)
 }
 
-function promptForReload() {
+function checkThemeAgainstSettings() {
+  const darkConfig = workspace.getConfiguration("polychrome.dark")
+  const lightConfig = workspace.getConfiguration("polychrome.light")
+
+  if (
+    darkConfig.background !== darkTheme.polychromeConfig.background ||
+    darkConfig.primary !== darkTheme.polychromeConfig.primary ||
+    darkConfig.accent !== darkTheme.polychromeConfig.accent ||
+    lightConfig.background !== lightTheme.polychromeConfig.background ||
+    lightConfig.primary !== lightTheme.polychromeConfig.primary ||
+    lightConfig.accent !== lightTheme.polychromeConfig.accent
+  ) {
+    updateAllThemes()
+    promptForReload()
+  }
+}
+
+function promptForReload(
+  message = "Please reload the window in order for your theme changes to take effect for Polychrome"
+) {
   const action = "Reload"
 
-  window
-    .showInformationMessage(
-      "Reload window in order for changes to take effect for Polychrome",
-      action
-    )
-    .then((selectedAction) => {
-      if (selectedAction === action) {
-        commands.executeCommand("workbench.action.reloadWindow")
-      }
-    })
+  window.showInformationMessage(message, action).then((selectedAction) => {
+    if (selectedAction === action) {
+      commands.executeCommand("workbench.action.reloadWindow")
+    }
+  })
 }
 
 function updateAllThemes() {
@@ -49,6 +66,8 @@ function updateAllThemes() {
 }
 
 function activate(context) {
+  checkThemeAgainstSettings()
+
   const commandRegistration = commands.registerCommand(
     "polychrome.generateThemes",
     () => {
