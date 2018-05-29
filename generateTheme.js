@@ -125,37 +125,33 @@ module.exports = function generateTheme(
   const gitRemoved = red.hex()
 
   const theme = `{
+    "polychromeConfig": {
+      "background": "${backgroundColor}",
+      "primary": "${primaryColor}",
+      "accent": "${accentColor}"
+    },
     "name": "Polychrome ${isDarkBg ? "Dark" : "Light"}",
     "type": "${isDarkBg ? "dark" : "light"}",
     "colors": {
-      /* Contrast Colors */
       "contrastActiveBorder": "#00000000",
       "contrastBorder": "${uiBgContrast.hex()}11",
-      /* Base Colors */
       "focusBorder": "#00000000",
       "foreground": "${foreground}",
       "widget.shadow": "#0004",
       "selection.background": "${selection}",
       "descriptionForeground": "${mutedText}",
       "errorForeground": "${red.hex()}",
-      /* Text Colors */
       "textBlockQuote.background": "${bgHighlight}",
       "textBlockQuote.border": "${primary5}",
-      // "textCodeBlock.background": "#ff0000",
       "textLink.activeForeground": "${bgContrast.hex()}",
       "textLink.foreground": "${primary3}",
       "textPreformat.foreground": "${accent2}",
-      // "textSeparator.foreground": "#ff0000",
-      /* Button Control */
       "button.background": "${primary5}",
       "button.foreground": "${bgContrast.hex()}",
       "button.hoverBackground": "${primary4}",
-      /* Dropdown Control */
       "dropdown.background": "${editorBg}",
       "dropdown.border": "${bgContrast.hex()}22",
       "dropdown.foreground": "${foreground}",
-      // "dropdown.listBackground": "#ff0000",
-      /* Input Control */
       "input.background": "${bgHighlight}",
       "input.border": "${bgContrast.hex()}22",
       "input.foreground": "${bgContrast.hex()}",
@@ -163,23 +159,15 @@ module.exports = function generateTheme(
       "inputOption.activeBorder": "${primary4}",
       "inputValidation.errorBackground": "#392A31",
       "inputValidation.errorBorder": "#CD5C5C",
-      // "inputValidation.infoBackground": "#ff0000",
-      // "inputValidation.infoBorder": "#ff0000",
-      // "inputValidation.warningBackground": "#ff0000",
-      // "inputValidation.warningBorder": "#ff0000",
-      /* Scroll Bar Control */
       "scrollbar.shadow": "#00000000",
       "scrollbarSlider.activeBackground": "${bgContrast.hex()}55",
       "scrollbarSlider.background": "${bgContrast.hex()}11",
       "scrollbarSlider.hoverBackground": "${bgContrast.hex()}33",
-      /* Badge */
       "badge.foreground": "${color(primary3)
         .contrast()
         .hex()}",
       "badge.background": "${primary3}",
-      /* Progress Bar */
       "progressBar.background": "${primary3}",
-      /* Lists and Trees */
       "list.activeSelectionBackground": "${editorBg}",
       "list.inactiveSelectionBackground": "${editorBg}",
       "list.activeSelectionForeground": "${bgContrast.hex()}",
@@ -190,7 +178,6 @@ module.exports = function generateTheme(
       "list.hoverBackground": "${bgHighlight}",
       "list.hoverForeground": "${foreground}",
       "list.inactiveSelectionForeground": "${bgContrast.hex()}",
-      /* Activity Bar */
       "activityBar.background": "${activityBarBg}",
       "activityBar.border": "${uiBgContrast.hex()}11",
       "activityBar.dropBackground": "${editorBg}",
@@ -199,7 +186,6 @@ module.exports = function generateTheme(
       "activityBarBadge.foreground": "${color(primary3)
         .contrast()
         .hex()}",
-      /* Side Bar */
       "sideBar.background": "${sideBarBg}",
       "sideBar.foreground": "${mutedText}",
       "sideBar.dropBackground": "${editorBg}",
@@ -207,7 +193,6 @@ module.exports = function generateTheme(
       "sideBarTitle.foreground": "${bgContrast.hex()}aa",
       "sideBarSectionHeader.background": "${sideBarHeaderBg}00",
       "sideBar.border": "${uiBorder}",
-      /* Editor Groups and Tabs */
       "editorGroup.background": "${sideBarBg}",
       "editorGroup.dropBackground": "${bgHighlight}",
       "editorGroupHeader.noTabsBackground": "${sideBarBg}",
@@ -231,7 +216,6 @@ module.exports = function generateTheme(
       "tab.unfocusedHoverBackground": "${editorBg}",
       "tab.unfocusedHoverBorder": "${editorBg}",
       "tab.inactiveBackground": "${tabBg}",
-      /* Editor Colors */
       "editor.background": "${editorBg}",
       "editor.foreground": "${primary2}",
       "editor.selectionBackground": "${selection}cc",
@@ -276,11 +260,8 @@ module.exports = function generateTheme(
       "editorGutter.modifiedBackground": "${orange.hex()}",
       "editorGutter.addedBackground": "${green.hex()}",
       "editorGutter.deletedBackground": "${red.hex()}",
-      // editorOverview
-      /* Diff Editor Colors */
       "diffEditor.insertedTextBackground": "${green.hex()}26",
       "diffEditor.removedTextBackground": "${red.hex()}26",
-      /* Editor Widget Colors */
       "editorWidget.background": "${background.lighten().hex()}",
       "editorWidget.border": "${primary4}",
       "editorSuggestWidget.background": "${uiBg}",
@@ -289,24 +270,18 @@ module.exports = function generateTheme(
       "editorSuggestWidget.highlightForeground": "${primary2}",
       "editorSuggestWidget.selectedBackground": "${selection}",
       "editorHoverWidget.background": "${uiBg}",
-      // debugException
-      // editorMarkerNavigation
-      /* Peek View Colors */
       "peekView.border": "${primary4}",
       "peekViewEditor.background": "${editorBg}",
       "peekViewEditor.matchHighlightBackground": "${accent2}44",
       "peekViewEditorGutter.background": "${editorBg}",
       "peekViewResult.background": "${uiBg}",
       "peekViewResult.selectionBackground": "${selection}",
-      /* Merge Conflicts */
-      /* Panel Colors */
       "panel.border": "${uiBorder}",
       "panel.background": "${panelBg}",
       "panel.dropBackground": "${editorBg}",
       "panelTitle.activeBorder": "${primary2}",
       "panelTitle.activeForeground": "${primary1}",
       "panelTitle.inactiveForeground": "${mutedText}",
-      /* Status Bar Colors */
       "statusBar.background": "${titleBarBg}",
       "statusBar.border": "#00000000",
       "statusBar.foreground": "${mutedText}",
@@ -318,10 +293,8 @@ module.exports = function generateTheme(
       "statusBar.noFolderForeground": "${color(primary3)
         .contrast()
         .hex()}",
-      /* Title Bar Colors */
       "titleBar.border": "#00000000",
-      "titleBar.activeBackground": "${titleBarBg}",
-      /* Notification Dialog Colors */  
+      "titleBar.activeBackground": "${titleBarBg}", 
       "notificationCenter.border": "#0000",
       "notificationCenterHeader.foreground": "${primary1}",
       "notificationCenterHeader.background": "${activityBarBg}",
@@ -330,21 +303,18 @@ module.exports = function generateTheme(
       "notifications.border": "${uiBorder}",
       "notifications.background": "${sideBarBg}",
       "notificationLink.foreground": "${primary3}",
-      /* Extensions */
       "extensionButton.prominentBackground": "${primary5}",
       "extensionButton.prominentForeground": "${color(primary5)
         .contrast()
         .hex()}",
       "extensionButton.prominentHoverBackground": "${primary4}",
-      /* Quick Picker */
-      /* Integrated Terminal Colors */
       "terminal.ansiBlack": "${primary5}",
       "terminal.ansiBlue": "${primary2}",
       "terminal.ansiCyan": "${primary4}",
       "terminal.ansiGreen": "${primary3}",
       "terminal.ansiMagenta": "${accent1}",
       "terminal.ansiRed": "${red.hex()}",
-      "terminal.ansiWhite": "#f5f5f5",
+      "terminal.ansiWhite": "${bgContrast.hex()}",
       "terminal.ansiYellow": "${accent1}",
       "terminal.ansiBrightBlack": "${accent2}",
       "terminal.ansiBrightBlue": "${primary1}",
@@ -354,10 +324,7 @@ module.exports = function generateTheme(
       "terminal.ansiBrightRed": "${accent1}",
       "terminal.ansiBrightWhite": "${bgContrast.hex()}",
       "terminal.ansiBrightYellow": "${accent2}",
-      /* Debug */
       "debugToolBar.background": "${selection}",
-      /* Welcome Page */
-      /* Git Colors */
       "gitDecoration.conflictingResourceForeground": "${red.hex()}",
       "gitDecoration.deletedResourceForeground": "${gitRemoved}",
       "gitDecoration.ignoredResourceForeground": "${mutedText}77",
@@ -464,7 +431,6 @@ module.exports = function generateTheme(
           "foreground": "${accent3}"
         }
       },
-      // Special Cases for font styles
       {
         "name": "Comment",
         "scope": [
