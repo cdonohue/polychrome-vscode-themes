@@ -125,11 +125,6 @@ module.exports = function generateTheme(
   const gitRemoved = red.hex()
 
   const theme = `{
-    "polychromeConfig": {
-      "background": "${backgroundColor}",
-      "primary": "${primaryColor}",
-      "accent": "${accentColor}"
-    },
     "name": "Polychrome ${isDarkBg ? "Dark" : "Light"}",
     "type": "${isDarkBg ? "dark" : "light"}",
     "colors": {

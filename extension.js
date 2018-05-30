@@ -2,6 +2,7 @@ const { commands, window, workspace } = require("vscode")
 const generateTheme = require("./generateTheme")
 const path = require("path")
 const fse = require("fs-extra")
+const { isEqual } = require("lodash")
 
 const darkThemePath = path.join(
   __dirname,
@@ -33,16 +34,26 @@ function checkThemeAgainstSettings() {
   const darkConfig = workspace.getConfiguration("polychrome.dark")
   const lightConfig = workspace.getConfiguration("polychrome.light")
 
+  const generatedDarkTheme = JSON.parse(
+    generateTheme(darkConfig.accent, darkConfig.background, darkConfig.primary)
+  )
+  const generatedLightTheme = JSON.parse(
+    generateTheme(
+      lightConfig.accent,
+      lightConfig.background,
+      lightConfig.primary
+    )
+  )
+
+  // Check to see if the user's settings generate a theme that matches the local theme files
   if (
-    darkConfig.background !== darkTheme.polychromeConfig.background ||
-    darkConfig.primary !== darkTheme.polychromeConfig.primary ||
-    darkConfig.accent !== darkTheme.polychromeConfig.accent ||
-    lightConfig.background !== lightTheme.polychromeConfig.background ||
-    lightConfig.primary !== lightTheme.polychromeConfig.primary ||
-    lightConfig.accent !== lightTheme.polychromeConfig.accent
+    !isEqual(darkTheme, generatedDarkTheme) ||
+    !isEqual(lightTheme, generatedLightTheme)
   ) {
     updateAllThemes()
-    promptForReload()
+    promptForReload(
+      "Polychrome has detected some changes and needs to regenerate your themes. Please reload the window for these changes to take effect."
+    )
   }
 }
 

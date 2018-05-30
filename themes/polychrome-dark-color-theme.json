@@ -1,9 +1,4 @@
 {
-    "polychromeConfig": {
-      "background": "#2a2833",
-      "primary": "#a59ccc",
-      "accent": "#ffe685"
-    },
     "name": "Polychrome Dark",
     "type": "dark",
     "colors": {
