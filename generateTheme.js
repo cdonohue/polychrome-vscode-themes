@@ -366,6 +366,7 @@ module.exports = function generateTheme(
           "meta.property-name",
           "support.type.property-name",
           "variable.language.this",
+          "variable.parameter",
           "support.variable.property.dom.js",
           "variable"
         ],
@@ -406,7 +407,8 @@ module.exports = function generateTheme(
           "constant.other",
           "variable.other.constant",
           "support.constant",
-          "meta.object-literal.key"
+          "meta.object-literal.key",
+          "storage.type"
         ],
         "settings": {
           "foreground": "${accent1}"
@@ -425,7 +427,8 @@ module.exports = function generateTheme(
       {
         "name": "Accent 3",
         "scope": [
-          "comment.block.c"
+          "comment.block.c",
+          "meta.parameters comment.block"
         ],
         "settings": {
           "foreground": "${accent3}"
@@ -442,43 +445,14 @@ module.exports = function generateTheme(
         }
       },
       {
-        "name": "Comment in Params",
-        "scope": "meta.parameters comment.block",
-        "settings": {
-          "foreground": "${accent3}",
-          "fontStyle": "italic"
-        }
-      },
-      {
-        "name": "Storage type",
-        "scope": "storage.type",
-        "settings": {
-          "fontStyle": "italic",
-          "foreground": "${accent1}"
-        }
-      },
-      {
         "name": "Class name",
-        "scope": "entity.name.class",
+        "scope": [
+          "entity.name.class",
+          "entity.other.inherited-class"
+        ],
         "settings": {
           "fontStyle": "underline",
           "foreground": "${primary1}"
-        }
-      },
-      {
-        "name": "Inherited class",
-        "scope": "entity.other.inherited-class",
-        "settings": {
-          "fontStyle": "italic underline",
-          "foreground": "${primary1}"
-        }
-      },
-      {
-        "name": "Function argument",
-        "scope": "variable.parameter",
-        "settings": {
-          "fontStyle": "italic",
-          "foreground": "${primary3}"
         }
       },
       {
@@ -498,19 +472,19 @@ module.exports = function generateTheme(
       {
         "scope": "token.info-token",
         "settings": {
-          "foreground": "#6796e6"
+          "foreground": "${blue.hex()}"
         }
       },
       {
         "scope": "token.warn-token",
         "settings": {
-          "foreground": "#cd9731"
+          "foreground": "${orange.hex()}"
         }
       },
       {
         "scope": "token.error-token",
         "settings": {
-          "foreground": "#f44747"
+          "foreground": "${red.hex()}"
         }
       },
       {

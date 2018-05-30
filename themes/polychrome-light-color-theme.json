@@ -222,6 +222,7 @@
           "meta.property-name",
           "support.type.property-name",
           "variable.language.this",
+          "variable.parameter",
           "support.variable.property.dom.js",
           "variable"
         ],
@@ -262,7 +263,8 @@
           "constant.other",
           "variable.other.constant",
           "support.constant",
-          "meta.object-literal.key"
+          "meta.object-literal.key",
+          "storage.type"
         ],
         "settings": {
           "foreground": "#A97E50"
@@ -281,7 +283,8 @@
       {
         "name": "Accent 3",
         "scope": [
-          "comment.block.c"
+          "comment.block.c",
+          "meta.parameters comment.block"
         ],
         "settings": {
           "foreground": "#D2CDC8"
@@ -298,43 +301,14 @@
         }
       },
       {
-        "name": "Comment in Params",
-        "scope": "meta.parameters comment.block",
-        "settings": {
-          "foreground": "#D2CDC8",
-          "fontStyle": "italic"
-        }
-      },
-      {
-        "name": "Storage type",
-        "scope": "storage.type",
-        "settings": {
-          "fontStyle": "italic",
-          "foreground": "#A97E50"
-        }
-      },
-      {
         "name": "Class name",
-        "scope": "entity.name.class",
+        "scope": [
+          "entity.name.class",
+          "entity.other.inherited-class"
+        ],
         "settings": {
           "fontStyle": "underline",
           "foreground": "#351E78"
-        }
-      },
-      {
-        "name": "Inherited class",
-        "scope": "entity.other.inherited-class",
-        "settings": {
-          "fontStyle": "italic underline",
-          "foreground": "#351E78"
-        }
-      },
-      {
-        "name": "Function argument",
-        "scope": "variable.parameter",
-        "settings": {
-          "fontStyle": "italic",
-          "foreground": "#6B3DF1"
         }
       },
       {
@@ -354,19 +328,19 @@
       {
         "scope": "token.info-token",
         "settings": {
-          "foreground": "#6796e6"
+          "foreground": "#1492ff"
         }
       },
       {
         "scope": "token.warn-token",
         "settings": {
-          "foreground": "#cd9731"
+          "foreground": "#d5880b"
         }
       },
       {
         "scope": "token.error-token",
         "settings": {
-          "foreground": "#f44747"
+          "foreground": "#f42a2a"
         }
       },
       {
