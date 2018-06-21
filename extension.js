@@ -16,9 +16,6 @@ const lightThemePath = path.join(
   "polychrome-light-color-theme.json"
 )
 
-const darkTheme = require(darkThemePath)
-const lightTheme = require(lightThemePath)
-
 async function updateTheme(config, isDarkTheme = true) {
   const { accent, background, primary } = config
 
@@ -30,7 +27,7 @@ async function updateTheme(config, isDarkTheme = true) {
   await fse.writeFile(themePath, theme)
 }
 
-function checkThemeAgainstSettings() {
+async function verifyThemes() {
   const darkConfig = workspace.getConfiguration("polychrome.dark")
   const lightConfig = workspace.getConfiguration("polychrome.light")
 
@@ -44,6 +41,13 @@ function checkThemeAgainstSettings() {
       lightConfig.primary
     )
   )
+
+  const darkTheme = (await fse.exists(darkThemePath))
+    ? require(darkThemePath)
+    : {}
+  const lightTheme = (await fse.exists(lightThemePath))
+    ? require(lightThemePath)
+    : {}
 
   // Check to see if the user's settings generate a theme that matches the local theme files
   if (
@@ -77,7 +81,7 @@ function updateAllThemes() {
 }
 
 function activate(context) {
-  checkThemeAgainstSettings()
+  verifyThemes()
 
   const commandRegistration = commands.registerCommand(
     "polychrome.generateThemes",

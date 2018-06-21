@@ -63,18 +63,12 @@ module.exports = function generateTheme(
     : color(sideBarBg)
         .darken(5)
         .hex()
-  const activityBarBg = isDarkBg
+  const activityBarBg = sideBarBg
+  const titleBarBg = isDarkBg
     ? color(sideBarHeaderBg)
         .darken()
         .hex()
     : color(sideBarHeaderBg)
-        .darken(5)
-        .hex()
-  const titleBarBg = isDarkBg
-    ? color(activityBarBg)
-        .darken()
-        .hex()
-    : color(activityBarBg)
         .darken(5)
         .hex()
   const panelBg = background.lighten().hex()
@@ -83,7 +77,7 @@ module.exports = function generateTheme(
     ? background.darken(20).hex()
     : background.darken(5).hex()
   const uiBgContrast = color(uiBg).contrast()
-  const uiBorder = activityBarBg
+  const uiBorder = titleBarBg
   const bgHighlight = isDarkBg
     ? background.lighten().hex()
     : background.darken().hex()
@@ -102,7 +96,6 @@ module.exports = function generateTheme(
     : color(foreground)
         .setLightness(40)
         .hex()
-
   const indentGuide = isDarkBg
     ? background.lighten(20).hex()
     : background.darken(10).hex()
@@ -120,9 +113,11 @@ module.exports = function generateTheme(
   const blue = isDarkBg ? color("#6494ed") : color("#1492ff")
   const green = isDarkBg ? color("#73c990") : color("#2db448")
 
-  const gitAdded = green.hex()
-  const gitModified = orange.hex()
-  const gitRemoved = red.hex()
+  const gitAdded = primary1
+  const gitModified = color(mutedText)
+    .mix(foreground)
+    .hex()
+  const gitRemoved = accent3
 
   const theme = `{
     "name": "Polychrome ${isDarkBg ? "Dark" : "Light"}",
@@ -130,9 +125,11 @@ module.exports = function generateTheme(
     "colors": {
       "contrastActiveBorder": "#00000000",
       "contrastBorder": "${uiBgContrast.hex()}11",
+      "pickerGroup.border": "${uiBgContrast.hex()}11",
+      "pickerGroup.foreground": "${uiBgContrast.hex()}44",
       "focusBorder": "#00000000",
       "foreground": "${foreground}",
-      "widget.shadow": "#0004",
+      "widget.shadow": "#0005",
       "selection.background": "${selection}",
       "descriptionForeground": "${mutedText}",
       "errorForeground": "${red.hex()}",
@@ -172,9 +169,11 @@ module.exports = function generateTheme(
       "list.highlightForeground": "${primary2}",
       "list.hoverBackground": "${bgHighlight}",
       "list.hoverForeground": "${foreground}",
+      "list.errorForeground": "${red.hex()}",
+      "list.warningForeground": "${orange.hex()}",
       "list.inactiveSelectionForeground": "${bgContrast.hex()}",
       "activityBar.background": "${activityBarBg}",
-      "activityBar.border": "${uiBgContrast.hex()}11",
+      "activityBar.border": "${uiBorder}",
       "activityBar.dropBackground": "${editorBg}",
       "activityBar.foreground": "${mutedText}",
       "activityBarBadge.background": "${primary3}",
@@ -188,9 +187,9 @@ module.exports = function generateTheme(
       "sideBarTitle.foreground": "${bgContrast.hex()}aa",
       "sideBarSectionHeader.background": "${sideBarHeaderBg}00",
       "sideBar.border": "${uiBorder}",
-      "editorGroup.background": "${sideBarBg}",
+      "editorGroup.emptyBackground": "${sideBarBg}",
       "editorGroup.dropBackground": "${bgHighlight}",
-      "editorGroupHeader.noTabsBackground": "${sideBarBg}",
+      "editorGroupHeader.noTabsBackground": "${editorBg}",
       "editorGroupHeader.tabsBorder": "${editorBg}",
       "editorGroupHeader.tabsBackground": "${sideBarBg}",
       "editorGroup.border": "${uiBorder}",
@@ -198,7 +197,7 @@ module.exports = function generateTheme(
       "tab.inactiveForeground": "${mutedText}",
       "tab.unfocusedInactiveForeground": "${mutedText}",
       "tab.border": "${uiBorder}",
-      "tab.activeBorder": "${editorBg}",
+      "tab.activeBorder": "${uiBorder}00",
       "tab.activeForeground": "${color(editorBg)
         .contrast()
         .hex()}",
@@ -213,8 +212,11 @@ module.exports = function generateTheme(
       "tab.inactiveBackground": "${tabBg}",
       "editor.background": "${editorBg}",
       "editor.foreground": "${primary2}",
-      "editor.selectionBackground": "${selection}cc",
-      "editor.inactiveSelectionBackground": "${selection}cc",
+      "editorUnnecessary.foreground": "${color(primary3)
+        .grayscale()
+        .hex()}",
+      "editor.selectionBackground": "${selection}",
+      "editor.inactiveSelectionBackground": "${selection}",
       "editor.selectionHighlightBackground": "${selection}99",
       "editor.selectionHighlightBorder": "#0000",
       "editor.wordHighlightBackground": "${selection}cc",
@@ -252,11 +254,11 @@ module.exports = function generateTheme(
       "editorWarning.border": "#0000",
       "editorInfo.foreground": "${blue.hex()}",
       "editorInfo.border": "#0000",
-      "editorGutter.modifiedBackground": "${orange.hex()}",
-      "editorGutter.addedBackground": "${green.hex()}",
-      "editorGutter.deletedBackground": "${red.hex()}",
-      "diffEditor.insertedTextBackground": "${green.hex()}26",
-      "diffEditor.removedTextBackground": "${red.hex()}26",
+      "editorGutter.modifiedBackground": "${gitModified}",
+      "editorGutter.addedBackground": "${gitAdded}",
+      "editorGutter.deletedBackground": "${gitRemoved}",
+      "diffEditor.insertedTextBackground": "${gitAdded}11",
+      "diffEditor.removedTextBackground": "${gitRemoved}11",
       "editorWidget.background": "${background.lighten().hex()}",
       "editorWidget.border": "${primary4}",
       "editorSuggestWidget.background": "${uiBg}",
@@ -278,7 +280,7 @@ module.exports = function generateTheme(
       "panelTitle.activeForeground": "${primary1}",
       "panelTitle.inactiveForeground": "${mutedText}",
       "statusBar.background": "${titleBarBg}",
-      "statusBar.border": "#00000000",
+      "statusBar.border": "#0000",
       "statusBar.foreground": "${mutedText}",
       "statusBar.debuggingForeground": "${color(accent1)
         .contrast()
@@ -288,7 +290,7 @@ module.exports = function generateTheme(
       "statusBar.noFolderForeground": "${color(primary3)
         .contrast()
         .hex()}",
-      "titleBar.border": "#00000000",
+      "titleBar.border": "#0000",
       "titleBar.activeBackground": "${titleBarBg}", 
       "notificationCenter.border": "#0000",
       "notificationCenterHeader.foreground": "${primary1}",
@@ -435,7 +437,15 @@ module.exports = function generateTheme(
           "comment"
         ],
         "settings": {
-          "foreground": "${primary5}",
+          "foreground": "${
+            isDarkBg
+              ? color(primary5)
+                  .lighten(20)
+                  .hex()
+              : color(primary5)
+                  .darken(20)
+                  .hex()
+          }",
           "fontStyle": "italic"
         }
       },
